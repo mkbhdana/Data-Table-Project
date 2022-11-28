@@ -234,7 +234,7 @@ export default function EnhancedTable() {
               minWidth: 700,
               "&, .css-1owoy7t-MuiTableCell-root": { padding: "4px" },
               "&, .css-177gid-MuiTableCell-root": { padding: "6px" },
-              "&, .css-1ex1afd-MuiTableCell-root": { padding: "2px" },
+              "&, .css-1ex1afd-MuiTableCell-root": { padding: "4px" },
             }}
             aria-labelledby="tableTitle"
           >
