@@ -10,7 +10,7 @@ export default function SelectSmall(props) {
   return (
     <>
       <FormControl
-        sx={{ m: 1, minWidth: 180 }}
+        sx={{ m: 1, minWidth: 180, textAlign: "left", }}
         size="small"
         disabled={type === "EV Queue" ? false : true}
       >
