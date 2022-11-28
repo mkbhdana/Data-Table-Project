@@ -37,7 +37,6 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
         value={selected}
-        key={data.id}
         sx={{
           color: grey[400],
           display: "flex",
