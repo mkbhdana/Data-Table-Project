@@ -289,7 +289,6 @@ export default function EnhancedTable() {
                       <TableCell align="left">
                         <RowRadioButtonsGroup
                           onRadio={(e) => radioInputHandler(e, row.id)}
-                          data={row}
                         />
                       </TableCell>
                     </TableRow>
