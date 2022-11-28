@@ -232,7 +232,8 @@ export default function EnhancedTable() {
           <Table
             sx={{
               minWidth: 700,
-              "&, .css-177gid-MuiTableCell-root": { padding: "8px 0px" },
+              "&, .css-1owoy7t-MuiTableCell-root": { padding: "4px" },
+              "&, .css-177gid-MuiTableCell-root": { padding: "6px" },
               "&, .css-1ex1afd-MuiTableCell-root": { padding: "1px" },
             }}
             aria-labelledby="tableTitle"
