@@ -39,15 +39,11 @@ function getComparator(order, orderBy) {
 
 const headCells = [
   {
-    id: "name",
-
-    disablePadding: true,
+    id: "name", 
     label: "SKILL",
   },
   {
-    id: "id",
-
-    disablePadding: false,
+    id: "id",    
     label: "SKILL ID",
   },
 ];
@@ -66,7 +62,7 @@ function EnhancedTableHead(props) {
           <TableCell
             key={headCell.id}
             align="left"
-            padding={headCell.disablePadding ? "none" : "normal"}
+            padding="none"
             sortDirection={orderBy === headCell.id ? order : false}
             sx={{ backgroundColor: "#f5f5f5" }}
           >
