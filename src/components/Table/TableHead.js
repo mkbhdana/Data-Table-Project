@@ -86,7 +86,7 @@ function EnhancedTableHead(props) {
         <TableCell
           key="assign"
           align="left"
-          padding="normal"
+          padding="none"
           sortDirection={orderBy === "assign" ? order : false}
           sx={{ backgroundColor: "#f5f5f5" }}
         >
@@ -230,6 +230,7 @@ export default function EnhancedTable() {
             sx={{
               minWidth: 700,
               "&, .css-1ex1afd-MuiTableCell-root": { padding: 0 },
+              "&, .css-i47y0h-MuiTableCell-root": { padding: "9px 0px" },
             }}
             aria-labelledby="tableTitle"
           >
