@@ -8,7 +8,7 @@ import { blue, grey } from "@mui/material/colors";
 import SelectSmall from "./SelectRadio";
 
 export default function RowRadioButtonsGroup({ onRadio, data }) {
-  const [selected, setSelected] = useState(data.radioInput || "");
+  const [selected, setSelected] = useState("");
   const [menuSelect, setMenuSelect] = useState("");
 
   const isButtonSelected = (value) => {
@@ -37,11 +37,10 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
         value={selected}
-        key={data.id}
         sx={{
           color: grey[400],
           display: "flex",
-          gap: "1rem",
+          gap: "2rem",
         }}
       >
         <FormControlLabel

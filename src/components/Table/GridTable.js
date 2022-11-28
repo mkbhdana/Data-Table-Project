@@ -33,13 +33,3 @@ export default function ExportCustomToolbar() {
     </div>
   );
 }
-
-// function getExcel() {
-//   const config = {
-//     filename: "general-ledger-Q1",
-//     sheet: {
-//       data: []
-//     }
-//   };
-
-//   const dataSet = config.sheet.data;

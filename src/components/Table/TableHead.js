@@ -41,13 +41,11 @@ const headCells = [
   {
     id: "name",
 
-    disablePadding: true,
     label: "SKILL",
   },
   {
     id: "id",
 
-    disablePadding: false,
     label: "SKILL ID",
   },
 ];
@@ -66,7 +64,7 @@ function EnhancedTableHead(props) {
           <TableCell
             key={headCell.id}
             align="left"
-            padding={headCell.disablePadding ? "none" : "normal"}
+            padding="none"
             sortDirection={orderBy === headCell.id ? order : false}
             sx={{ backgroundColor: "#f5f5f5" }}
           >
@@ -84,13 +82,11 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell></TableCell>
-        <TableCell></TableCell>
 
         <TableCell
           key="assign"
-          align="left"
-          padding="normal"
+          align="right"
+          padding="none"
           sortDirection={orderBy === "assign" ? order : false}
           sx={{ backgroundColor: "#f5f5f5" }}
         >
@@ -106,7 +102,10 @@ function EnhancedTableHead(props) {
               </Box>
             ) : null}
           </TableSortLabel>
-          <Tooltip title="Export" sx={{ marginLeft: "15rem" }}>
+          <Tooltip
+            title="Export"
+            sx={{ marginLeft: "20.8rem", marginRight: "0.5rem" }}
+          >
             <IconButton onClick={props.onExcel}>
               <FileDownloadOutlinedIcon />
             </IconButton>
@@ -233,7 +232,8 @@ export default function EnhancedTable() {
           <Table
             sx={{
               minWidth: 700,
-              "&, .css-1ex1afd-MuiTableCell-root": { padding: 0 },
+              "&, .css-177gid-MuiTableCell-root": { padding: "8px 0px" },
+              "&, .css-1ex1afd-MuiTableCell-root": { padding: "1px" },
             }}
             aria-labelledby="tableTitle"
           >
@@ -287,13 +287,10 @@ export default function EnhancedTable() {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.id}</TableCell>
-                      <TableCell align="left"></TableCell>
-                      <TableCell align="left"></TableCell>
 
-                      <TableCell align="left">
+                      <TableCell align="right">
                         <RowRadioButtonsGroup
                           onRadio={(e) => radioInputHandler(e, row.id)}
-                          data={row}
                         />
                       </TableCell>
                     </TableRow>

@@ -17,7 +17,7 @@ export default function SimplePaper() {
 
         "& > :not(style)": {
           m: "10px 0px",
-          width: "35rem",
+          width: "45rem",
           height: "5.8rem",
         },
       }}

@@ -5,7 +5,7 @@ import LabTabs from "./components/Table/Tabs";
 function App() {
   return (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <MainHeader />
         <LabTabs />
       </Container>
