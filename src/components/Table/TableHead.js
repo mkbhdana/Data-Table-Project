@@ -323,7 +323,7 @@ export default function EnhancedTable() {
           }}
         >
           <TablePagination
-            rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]}
+            rowsPerPageOptions={[5, 10, { label: "All", value: rows.length }]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}
