@@ -88,7 +88,7 @@ function EnhancedTableHead(props) {
           align="right"
           padding="none"
           sortDirection={orderBy === "assign" ? order : false}
-          sx={{ backgroundColor: "#f5f5f5", flexDirection: ({ header }: Props) => {
+          sx={{ backgroundColor: "#f5f5f5", flexDirection: ({ header }) => {
               return header?.alignContent && header?.alignContent === "right"
                 ? "row-reverse"
                 : "row";
