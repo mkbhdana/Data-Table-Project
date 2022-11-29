@@ -32,6 +32,7 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
         value={selected}
+        onChange={handleChange}
         sx={{
           color: grey[400],
           display: "flex",
@@ -54,13 +55,13 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
           }
           label="Default"
           
-          onChange={handleChange}
+          
         />
 
         <FormControlLabel
           value="EV Queue"
           
-          onChange={handleChange}
+          
           control={
             <Radio
               sx={{
@@ -98,7 +99,7 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
           }
           label="Unassigned"
           
-          onChange={handleChange}
+          
         />
       </RadioGroup>
     </FormControl>
