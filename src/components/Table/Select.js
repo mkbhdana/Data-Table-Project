@@ -8,7 +8,7 @@ import { blue, grey } from "@mui/material/colors";
 import SelectSmall from "./SelectRadio";
 
 export default function RowRadioButtonsGroup({ onRadio, data }) {
-  const [selected, setSelected] = useState(data.assign || "");
+  const [selected, setSelected] = useState(data.assign);
   const [menuSelect, setMenuSelect] = useState("");
 
   const handleChange = (e) => {
