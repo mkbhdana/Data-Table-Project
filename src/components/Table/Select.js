@@ -27,6 +27,7 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
   const menuSelectHandler = (e) => {
     if (selected === "EV Queue") {
       setMenuSelect(e.target.value);
+      onRadio(e);
     }
   };
 
