@@ -88,7 +88,11 @@ function EnhancedTableHead(props) {
           align="right"
           padding="none"
           sortDirection={orderBy === "assign" ? order : false}
-          sx={{ backgroundColor: "#f5f5f5" }}
+          sx={{ backgroundColor: "#f5f5f5", flexDirection: ({ header }: Props) => {
+              return header?.alignContent && header?.alignContent === "right"
+                ? "row-reverse"
+                : "row";
+            }, }}
         >
           <TableSortLabel
             active={orderBy === "assign"}
@@ -104,7 +108,7 @@ function EnhancedTableHead(props) {
           </TableSortLabel>
           <Tooltip
             title="Export"
-            sx={{ marginLeft: "20.8rem", marginRight: "0.5rem" }}
+            sx={{ marginLeft: "19.5rem", marginRight: "0.5rem" }}
           >
             <IconButton onClick={props.onExcel}>
               <FileDownloadOutlinedIcon />
