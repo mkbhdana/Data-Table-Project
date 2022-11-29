@@ -29,9 +29,9 @@ export default function SelectSmall(props) {
           <MenuItem disabled defaultValue="Select">
             <em>Select</em>
           </MenuItem>
-          <MenuItem value={`${type} - Sales`}>Sales</MenuItem>
-          <MenuItem value={`${type} - Market`}>Market</MenuItem>
-          <MenuItem value={`${type} - Services`}>Service</MenuItem>
+          <MenuItem value="EV Queue - Sales">Sales</MenuItem>
+          <MenuItem value="EV Queue - Market">Market</MenuItem>
+          <MenuItem value="EV Queue - Service">Service</MenuItem>
         </Select>
       </FormControl>
     </>
