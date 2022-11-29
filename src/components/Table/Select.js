@@ -11,12 +11,6 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
   const [selected, setSelected] = useState("");
   const [menuSelect, setMenuSelect] = useState("");
 
-  const isButtonSelected = (value) => {
-    if (selected === value) {
-      return true;
-    }
-  };
-
   const handleChange = (e) => {
     setSelected(e.target.value);
     onRadio(e);
@@ -59,13 +53,13 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
             />
           }
           label="Default"
-          checked={isButtonSelected("Default")}
+          
           onChange={handleChange}
         />
 
         <FormControlLabel
           value="EV Queue"
-          checked={isButtonSelected("EV Queue")}
+          
           onChange={handleChange}
           control={
             <Radio
@@ -103,7 +97,7 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
             />
           }
           label="Unassigned"
-          checked={isButtonSelected("Unassigned")}
+          
           onChange={handleChange}
         />
       </RadioGroup>
