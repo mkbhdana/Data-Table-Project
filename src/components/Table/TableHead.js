@@ -139,7 +139,7 @@ export default function EnhancedTable() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://run.mocky.io/v3/77b9025f-46e7-46ab-adcd-df5c0818395d"
+        "https://run.mocky.io/v3/03c093bd-2990-45d1-9e7a-6eb04fe1f9de"
 
         
       );
