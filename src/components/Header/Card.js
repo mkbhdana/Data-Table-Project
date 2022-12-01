@@ -1,12 +1,9 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import React from "react";
+import { Box, Paper, SvgIcon, Button } from "@mui/material";
 import classes from "./Paper.module.css";
-import SvgIcon from "@mui/material/SvgIcon";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
-import Button from "@mui/material/Button";
 
-export default function SimplePaper() {
+export default function Card() {
   return (
     <Box
       sx={{

@@ -1,17 +1,17 @@
 import React from "react";
 import BadgeAvatars from "./Badge";
-import SimplePaper from "./Paper";
-import classes from "./MainHeader.module.css";
+import Card from "./Card";
+import classes from "./Header.module.css";
 
-const MainHeader = () => {
+const Header = () => {
   return (
     <>
       <header className={classes.header}>
         <BadgeAvatars />
-        <SimplePaper />
+        <Card />
       </header>
     </>
   );
 };
 
-export default MainHeader;
+export default Header;

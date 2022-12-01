@@ -1,24 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
-
-import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+import {
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Checkbox,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
 
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 import { visuallyHidden } from "@mui/utils";
-import RowRadioButtonsGroup from "./Select";
+import RowRadioButtonsGroup from "./RadioButton";
 import { CsvBuilder } from "filefy";
 
 function descendingComparator(a, b, orderBy) {
@@ -50,7 +51,7 @@ const headCells = [
   },
 ];
 
-function EnhancedTableHead(props) {
+function DataHead(props) {
   const { order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -88,11 +89,14 @@ function EnhancedTableHead(props) {
           align="right"
           padding="none"
           sortDirection={orderBy === "assign" ? order : false}
-          sx={{ backgroundColor: "#f5f5f5", flexDirection: ({ header }) => {
+          sx={{
+            backgroundColor: "#f5f5f5",
+            flexDirection: ({ header }) => {
               return header?.alignContent && header?.alignContent === "right"
                 ? "row-reverse"
                 : "row";
-            }, }}
+            },
+          }}
         >
           <TableSortLabel
             active={orderBy === "assign"}
@@ -120,7 +124,7 @@ function EnhancedTableHead(props) {
   );
 }
 
-EnhancedTableHead.propTypes = {
+DataHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
@@ -128,34 +132,36 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("id");
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setRows] = React.useState([]);
+export default function DataGrid() {
+  const [state, setState] = useState({
+    order: "asc",
+    orderBy: "id",
+
+    page: 0,
+    rowsPerPage: 5,
+    selected: [],
+    rows: [],
+  });
+
+  const fetchData = async () => {
+    const response = await fetch(
+      "https://run.mocky.io/v3/afde719f-52cb-4f6c-b1bb-66b135e74da2"
+    );
+
+    const json = await response.json();
+
+    setState((pre) => {
+      return { ...pre, rows: json };
+    });
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://run.mocky.io/v3/03c093bd-2990-45d1-9e7a-6eb04fe1f9de"
-
-        
-      );
-
-      const json = await response.json();
-
-      setRows(json);
-    };
-
     fetchData().catch(console.error);
   }, []);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
+    const isAsc = state.orderBy === property && state.order === "asc";
+    setState({ ...state, order: isAsc ? "desc" : "asc", orderBy: property });
   };
 
   // const handleSelectAllClick = (event) => {
@@ -168,43 +174,48 @@ export default function EnhancedTable() {
   // };
 
   const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+    const selectedIndex = state.selected.indexOf(name);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(state.selected, name);
       console.log(1);
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelected = newSelected.concat(state.selected.slice(1));
+    } else if (selectedIndex === state.selected.length - 1) {
+      newSelected = newSelected.concat(state.selected.slice(0, -1));
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+        state.selected.slice(0, selectedIndex),
+        state.selected.slice(selectedIndex + 1)
       );
     }
 
-    setSelected(newSelected);
+    setState({ ...state, selected: newSelected });
   };
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    setState({ ...state, page: newPage });
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setState({
+      ...state,
+      rowsPerPage: parseInt(event.target.value, 10),
+      page: 0,
+    });
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (name) => state.selected.indexOf(name) !== -1;
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    state.page > 0
+      ? Math.max(0, (1 + state.page) * state.rowsPerPage - state.rows.length)
+      : 0;
 
   const exportAllSelectedRows = () => {
-    const _rows = selected.map((rowData) =>
-      rows
+    const _rows = state.selected.map((rowData) =>
+      state.rows
         .map((row) => {
           if (row.name === rowData) {
             return [row.name, row.id, row.assign];
@@ -212,20 +223,23 @@ export default function EnhancedTable() {
         })
         .filter(Boolean)
     );
+    const _rows1 = state.rows.map((row) => {
+      return [row.name, row.id, row.assign];
+    });
 
     console.log(_rows, "rows");
     new CsvBuilder("tableData.csv")
       .setColumns(["Skill", "Skill ID", "FAILOVER"])
-      .addRows(_rows)
+      .addRows(!state.selected ? _rows : _rows1)
 
       .exportFile();
   };
 
   const radioInputHandler = (e, id) => {
-    setRows((pre) => {
-      const current = pre.find((v) => v.id === id);
+    setState((pre) => {
+      const current = pre.rows.find((v) => v.id === id);
       current["assign"] = e.target.value;
-      return [...pre];
+      return { ...pre };
     });
   };
 
@@ -242,22 +256,25 @@ export default function EnhancedTable() {
             }}
             aria-labelledby="tableTitle"
           >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
+            <DataHead
+              numSelected={state.selected.length}
+              order={state.order}
+              orderBy={state.orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={state.rows.length}
               title="Data"
-              data={rows}
+              data={state.rows}
               columns={headCells}
               onExcel={exportAllSelectedRows}
             />
 
             <TableBody>
-              {rows
-                .sort(getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              {state.rows
+                .sort(getComparator(state.order, state.orderBy))
+                .slice(
+                  state.page * state.rowsPerPage,
+                  state.page * state.rowsPerPage + state.rowsPerPage
+                )
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -296,6 +313,7 @@ export default function EnhancedTable() {
                       <TableCell align="right">
                         <RowRadioButtonsGroup
                           onRadio={(e) => radioInputHandler(e, row.id)}
+                          data={row}
                         />
                       </TableCell>
                     </TableRow>
@@ -323,11 +341,15 @@ export default function EnhancedTable() {
           }}
         >
           <TablePagination
-            rowsPerPageOptions={[5, 10, { label: "All", value: rows.length }]}
+            rowsPerPageOptions={[
+              5,
+              10,
+              { label: "All", value: state.rows.length },
+            ]}
             component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
+            count={state.rows.length}
+            rowsPerPage={state.rowsPerPage}
+            page={state.page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
             showFirstButton
@@ -336,7 +358,7 @@ export default function EnhancedTable() {
               return page + 1;
             }}
           />
-          <h5 style={{ textAlign: "right" }}>Masks: {selected.length}</h5>
+          <h5 style={{ textAlign: "right" }}>Masks: {state.selected.length}</h5>
         </div>
       </Paper>
     </Box>

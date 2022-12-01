@@ -1,26 +1,31 @@
 import React, { useState } from "react";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
+import {
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+} from "@mui/material";
 import { blue, grey } from "@mui/material/colors";
 
-import SelectSmall from "./SelectRadio";
+import SelectMenu from "./SelectMenu";
 
 export default function RowRadioButtonsGroup({ onRadio, data }) {
-  const [selected, setSelected] = useState(data.assign);
-  const [menuSelect, setMenuSelect] = useState('');
+  const [state, setState] = useState({
+    selected: data.assign,
+    menuSelect: "",
+  });
+
+  // const [selected, setSelected] = useState(data.assign);
+  // const [menuSelect, setMenuSelect] = useState('');
 
   const handleChange = (e) => {
-    setSelected(e.target.value);
+    setState({ ...state, selected: e.target.value, menuSelect: "" });
     onRadio(e);
-
-    setMenuSelect("");
   };
 
   const menuSelectHandler = (e) => {
-    if (selected === "EV Queue") {
-      setMenuSelect(e.target.value);
+    if (state.selected === "EV Queue") {
+      setState({ ...state, menuSelect: e.target.value });
       onRadio(e);
     }
   };
@@ -31,7 +36,8 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
-        value={selected}
+        defaultValue="Default"
+        value={state.selected}
         onChange={handleChange}
         sx={{
           color: grey[400],
@@ -54,14 +60,10 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
             />
           }
           label="Default"
-          
-          
         />
 
         <FormControlLabel
           value="EV Queue"
-          
-          
           control={
             <Radio
               sx={{
@@ -77,9 +79,9 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
           }
           label="EV Queue"
         />
-        <SelectSmall
-          type={selected}
-          value={menuSelect}
+        <SelectMenu
+          type={state.selected}
+          value={state.menuSelect}
           onSelectMenu={menuSelectHandler}
         />
 
@@ -98,8 +100,6 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
             />
           }
           label="Unassigned"
-          
-          
         />
       </RadioGroup>
     </FormControl>

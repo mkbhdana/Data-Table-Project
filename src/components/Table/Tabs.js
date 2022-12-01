@@ -1,14 +1,11 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import EnhancedTable from "./TableHead";
-import ExportCustomToolbar from "./GridTable";
+import React, { useState } from "react";
+import { Box, Tab } from "@mui/material";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 
-export default function LabTabs() {
-  const [value, setValue] = React.useState("1");
+import DataGrid from "./DataGrid";
+
+export default function Tabs() {
+  const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -46,7 +43,7 @@ export default function LabTabs() {
             <Tab
               label="Agents"
               value="2"
-              //   disabled
+              disabled
               sx={{
                 "&.MuiTab-root": {
                   borderTopLeftRadius: 6,
@@ -80,12 +77,10 @@ export default function LabTabs() {
           </TabList>
         </Box>
         <TabPanel value="1">
-          <EnhancedTable />
+          <DataGrid />
         </TabPanel>
-        <TabPanel value="2">
-          <ExportCustomToolbar />
-        </TabPanel>
-        <TabPanel value="3">CCRNs</TabPanel>
+        <TabPanel value="2"></TabPanel>
+        <TabPanel value="3"></TabPanel>
       </TabContext>
     </Box>
   );
