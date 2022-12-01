@@ -15,9 +15,6 @@ export default function RowRadioButtonsGroup({ onRadio, data }) {
     menuSelect: "",
   });
 
-  // const [selected, setSelected] = useState(data.assign);
-  // const [menuSelect, setMenuSelect] = useState('');
-
   const handleChange = (e) => {
     setState({ ...state, selected: e.target.value, menuSelect: "" });
     onRadio(e);
