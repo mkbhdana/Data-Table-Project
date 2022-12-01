@@ -161,7 +161,9 @@ export default function DataGrid() {
 
   const handleRequestSort = (event, property) => {
     const isAsc = state.orderBy === property && state.order === "asc";
-    setState({ ...state, order: isAsc ? "desc" : "asc", orderBy: property });
+    setState((prevState) => {
+      return { ...prevState, order: isAsc ? "desc" : "asc", orderBy: property };
+    });
   };
 
   // const handleSelectAllClick = (event) => {
@@ -190,19 +192,24 @@ export default function DataGrid() {
         state.selected.slice(selectedIndex + 1)
       );
     }
-
-    setState({ ...state, selected: newSelected });
+    setState((prevState) => {
+      return { ...prevState, selected: newSelected };
+    });
   };
 
   const handleChangePage = (event, newPage) => {
-    setState({ ...state, page: newPage });
+    setState((prevState) => {
+      return { ...prevState, page: newPage };
+    });
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setState({
-      ...state,
-      rowsPerPage: parseInt(event.target.value, 10),
-      page: 0,
+    setState((prevState) => {
+      return {
+        ...prevState,
+        rowsPerPage: parseInt(event.target.value, 10),
+        page: 0,
+      };
     });
   };
 
