@@ -365,7 +365,9 @@ export default function DataGrid() {
               return page + 1;
             }}
           />
-          <h5 style={{ textAlign: "right" }}>Masks: {state.selected.length}</h5>
+          <h5 style={{ textAlign: "right" }}>
+            Masks: <span style={{ color: "#42a5f5" }}>{state.rows.length}</span>
+          </h5>
         </div>
       </Paper>
     </Box>
